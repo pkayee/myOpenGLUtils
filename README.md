@@ -2,9 +2,6 @@
 
 random open gl projects i make.
 
-## Installation
-
-Run in preffered ide.
 
 
 ## Contributing
