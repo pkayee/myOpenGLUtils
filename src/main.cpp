@@ -26,14 +26,9 @@
 
 
 
-// Vertices coordinates
 
 
-const char* shapes[] = {
-	"Kotlin",
-	"Square",
-	"Triangle"
-};
+
 static int currentShape = 0;
 float posX = 0.0f, posY = 0.0f, posZ = 0.0f;
 bool debugOn = false;
@@ -52,13 +47,7 @@ void debug() {
 	}
 }
 
-void shapeChange() {
-	Square SquareShape;
-	VBO VBO1(SquareShape.vertices, sizeof(SquareShape.vertices));
-	// Generates Element Buffer Object and links it to indices
-	EBO EBO1(SquareShape.indices, sizeof(SquareShape.indices));
 
-}
 
 void movement() {
 
@@ -109,10 +98,10 @@ int main()
 	// So that means we only have the modern functions
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	// Create a GLFWwindow object of 800 by 800 pixels, naming it "YoutubeOpenGL"
+	// Create a GLFWindow object of 800 by 800 pixels, naming it "YoutubeOpenGL"
 	GLFWwindow* window = glfwCreateWindow(800, 800, "YoutubeOpenGL", NULL, NULL);
 	// Error check if the window fails to create
-	if (window == NULL)
+	if (window == nullptr)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
@@ -139,12 +128,11 @@ int main()
 	// Generates Vertex Array Object and binds it
 	VAO VAO1;
 	VAO1.Bind();
-	Kotlin KotlinShape;
 
 	// Generates Vertex Buffer Object and links it to vertices
-	VBO VBO1(KotlinShape.vertices, sizeof(KotlinShape.vertices));
+	VBO VBO1(Kotlin::vertices, sizeof(Kotlin::vertices));
 	// Generates Element Buffer Object and links it to indices
-	EBO EBO1(KotlinShape.indices, sizeof(KotlinShape.indices));
+	EBO EBO1(Kotlin::indices, sizeof(Kotlin::indices));
 
 
 	// Links VBO to VAO
@@ -155,10 +143,10 @@ int main()
 	EBO1.Unbind();
 
 	auto shapeChange = []()  {
-		Square SquareShape;
-		VBO VBO1(SquareShape.vertices, sizeof(SquareShape.vertices));
+		ShapeData& shape = shapeMap[shapes[currentShape]];
+		VBO VBO1(shape.vertices, shape.vertSize);
 		// Generates Element Buffer Object and links it to indices
-		EBO EBO1(SquareShape.indices, sizeof(SquareShape.indices));
+		EBO EBO1(shape.indices, shape.indecieSize);
 
 	};
 
@@ -222,8 +210,7 @@ int main()
 
 			ImGui::Text("Properties");
 			ImGui::SliderFloat("Scale", &slideValue, 0.0f, 99.0f);
-			ImGui::Combo("Shapes", &currentShape, shapes, IM_ARRAYSIZE(shapes));
-			if (currentShape == 1) {
+			if (ImGui::Combo("Shapes", &currentShape, shapes, IM_ARRAYSIZE(shapes))) {
 				shapeChange();
 			}
 
