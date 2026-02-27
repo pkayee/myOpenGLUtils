@@ -1,4 +1,4 @@
-# opengl"stuff"
+# myOpenGLUtils
 
 random open gl projects i make.
 
