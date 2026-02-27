@@ -143,7 +143,8 @@ int main()
 	EBO1.Unbind();
 
 	auto shapeChange = []()  {
-		ShapeData& shape = shapeMap[shapes[currentShape]];
+		ShapeData& shape = shapeMap[shapesStrings[currentShape]];
+
 		VBO VBO1(shape.vertices, shape.vertSize);
 		// Generates Element Buffer Object and links it to indices
 		EBO EBO1(shape.indices, shape.indecieSize);
@@ -210,7 +211,7 @@ int main()
 
 			ImGui::Text("Properties");
 			ImGui::SliderFloat("Scale", &slideValue, 0.0f, 99.0f);
-			if (ImGui::Combo("Shapes", &currentShape, shapes, IM_ARRAYSIZE(shapes))) {
+			if (ImGui::Combo("Shapes", &currentShape, shapesStrings, IM_ARRAYSIZE(shapesStrings))) {
 				shapeChange();
 			}
 

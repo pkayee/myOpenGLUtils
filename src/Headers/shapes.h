@@ -47,7 +47,20 @@ public:
     };
 };
 
-constexpr const char* shapes[] = {
+class Triangle {
+public:
+    static constexpr GLfloat vertices[12] = {
+        0.0f,  0.5f,  0.0f,  // top-center
+    -0.5f, -0.5f,  0.0f,  // bottom-left
+     0.5f, -0.5f,  0.0f   // bottom-right
+   };
+
+    static constexpr GLuint indices[6] = {
+        0, 1, 2  // one triangle
+    };
+};
+
+constexpr const char* shapesStrings[] = {
     "Kotlin",
     "Square",
     "Triangle"
@@ -55,7 +68,9 @@ constexpr const char* shapes[] = {
 
 inline std::map<std::string, ShapeData> shapeMap {
     {"Kotlin",{Kotlin::vertices, Kotlin::indices, sizeof(Kotlin::vertices),sizeof(Kotlin::indices), 12, 6}},
-    {"Square",{Square::vertices, Square::indices, sizeof(Kotlin::vertices),sizeof(Kotlin::indices),12, 6}}
+    {"Square",{Square::vertices, Square::indices, sizeof(Square::vertices),sizeof(Square::indices),12, 6}},
+    {"Triangle",{Triangle::vertices, Triangle::indices, sizeof(Triangle::vertices),sizeof(Triangle::indices),12, 6}}
+
 
 
 };
